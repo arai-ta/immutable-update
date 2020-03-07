@@ -1,8 +1,21 @@
 {
+    "name": "atiara/immutable-update",
+    "type": "library",
+    "description": "Tiny trait for immutable object lover",
+    "homepage": "https://github.com/arai-ta/immutable-update",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ARAI Takashi",
+            "email": "takashi.arai.nz@icloud.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
     "require-dev": {
         "phpunit/phpunit": "^9.0"
     },
-
     "autoload": {
         "psr-4": {
             "Atiara\\ImmutableUpdate\\": "src"
