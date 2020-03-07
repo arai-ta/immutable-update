@@ -40,12 +40,20 @@ class ImmutableUpdateTraitTest extends TestCase
         $this->assertSame(['foo' => 'Ninja', 'bar' => "BAR", 'baz' => 'BAZ'], $new->dump());
     }
 
-    public function testBad()
+    public function testBadMethod()
     {
         $this->expectException(\BadMethodCallException::class);
 
         $obj = new class { use ImmutableUpdateTrait; };
         $obj->noSuchMethod('hoge');
+    }
+
+    public function testBadProperty()
+    {
+        $this->expectException(\BadMethodCallException::class);
+
+        $obj = new class { use ImmutableUpdateTrait; };
+        $obj->withHoge('hoge');
     }
 
 }
