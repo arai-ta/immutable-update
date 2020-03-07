@@ -1,6 +1,6 @@
 <?php
 
-namespace Araitta\ImmutableUpdateTrait;
+namespace Araitta\ImmutableUpdate;
 
 use PHPUnit\Framework\TestCase;
 
@@ -9,7 +9,11 @@ class ImmutableUpdateTraitTest extends TestCase
 
     public function test()
     {
-        $this->assertEquals(1, 2);
+        $obj = new class {
+            use ImmutableUpdateTrait;
+        };
+
+        $obj->meth();
     }
 
 }
