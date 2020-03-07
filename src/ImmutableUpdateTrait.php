@@ -27,7 +27,7 @@ trait ImmutableUpdateTrait
             }
         }
 
-        throw new \BadFunctionCallException('Undefined method call:'.$name);
+        throw new \BadMethodCallException('Undefined method call:'.$name);
     }
 
     protected static function propertyNameFromMatches(string $matches): string
