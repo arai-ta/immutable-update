@@ -87,10 +87,28 @@ class ImmutableUpdateTraitTest extends TestCase
                    ->withObject((object)['var' => 'value']);
         
         $this->assertSame("tokyo",  $new->string);
-        $this->assertSame(123,      $new->int);
+        $this->assertSame(123,      $new->int, 'do not change');
         $this->assertSame(true,     $new->bool);
         $this->assertSame("value",  $new->object->var);
     }
 
-}
+    public function testTypeMismatch()
+    {
+        $obj = new class(null) {
 
+            private $object;
+
+            use ImmutableUpdateTrait;
+
+            public function __construct(?object $o)
+            {
+                $this->object = $o;
+            }
+        };
+
+        $this->expectException(\TypeError::class);
+
+        $new = $obj->withObject(123.45);
+    }
+
+}
