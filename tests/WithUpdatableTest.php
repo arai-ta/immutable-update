@@ -1,6 +1,6 @@
 <?php
 
-namespace Araitta\ImmutableUpdate;
+namespace Atiara\ImmutableUpdate;
 
 use stdClass;
 use PHPUnit\Framework\TestCase;
