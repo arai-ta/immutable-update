@@ -111,4 +111,28 @@ class ImmutableUpdateTraitTest extends TestCase
         $new = $obj->withObject(123.45);
     }
 
+
+
+    public function testCaseChange()
+    {
+        $obj = new class("hoge") {
+
+            public $snake_case_property;
+            
+            use ImmutableUpdateTrait,
+                SnakePropertyCamelMethod {
+                    SnakePropertyCamelMethod::propertyNameFromMatches insteadOf ImmutableUpdateTrait;
+                }
+
+            public function __construct($arg)
+            {
+                $this->snake_case_property = $arg;
+            }
+        };
+
+        $new = $obj->withSnakeCaseProperty("fuga");
+
+        $this->assertSame("fuga", $new->snake_case_property);
+    }
+
 }

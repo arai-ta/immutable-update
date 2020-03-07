@@ -31,9 +31,9 @@ trait ImmutableUpdateTrait
         return new static(...$new_arguments);
     }
 
-    protected static function propertyNameFromMatches(string $matches): string
+    protected static function propertyNameFromMatches(string $s): string
     {
-        return strtolower($matches);
+        return strtolower($s);
     }
 
 }
