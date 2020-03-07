@@ -5,39 +5,34 @@ namespace Atiara\ImmutableUpdate;
 use stdClass;
 use PHPUnit\Framework\TestCase;
 
-class TestingClass
-{
-    use WithUpdatable;
-
-    private $foo;
-    private $bar;
-    private $baz;
-
-    public function __construct($foo, $bar, $baz)
-    {
-        $this->foo = $foo;
-        $this->bar = $bar;
-        $this->baz = $baz;
-    }
-
-    public function dump()
-    {
-        return get_object_vars($this);
-    }
-
-}
-
 class WithUpdatableTest extends TestCase
 {
 
-    public function test()
+    public function testBasic()
     {
-        $obj = new TestingClass("FOO", "BAR", "BAZ");
+        $obj = new class("FOO", "BAR", "BAZ") {
+            use WithUpdatable;
+
+            private $foo;
+            private $bar;
+            private $baz;
+
+            public function __construct($foo, $bar, $baz)
+            {
+                $this->foo = $foo;
+                $this->bar = $bar;
+                $this->baz = $baz;
+            }
+
+            public function dump()
+            {
+                return get_object_vars($this);
+            }
+        };
 
         $new = $obj->withFoo("Ninja");
 
         $this->assertNotSame($obj, $new, '$new is a new instance');
-        $this->assertInstanceOf(TestingClass::class, $new);
         $this->assertSame(['foo' => 'FOO',   'bar' => "BAR", 'baz' => 'BAZ'], $obj->dump());
         $this->assertSame(['foo' => 'Ninja', 'bar' => "BAR", 'baz' => 'BAZ'], $new->dump());
     }
