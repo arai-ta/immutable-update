@@ -1,6 +1,6 @@
 <?php
 
-namespace Araitta\ImmutableUpdate;
+namespace Araitta\ImmutableUpdate\NamingRule;
 
 trait SnakePropertyCamelMethod
 {

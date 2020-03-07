@@ -5,7 +5,7 @@ namespace Araitta\ImmutableUpdate;
 trait WithUpdatable
 {
 
-    use CamelCase;
+    use NamingRule\CamelCase;
 
     public function __call($name, $arguments)
     {

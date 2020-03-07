@@ -119,8 +119,8 @@ class WithUpdatableTest extends TestCase
             public $snake_case_property;
             
             use WithUpdatable,
-                SnakePropertyCamelMethod {
-                    SnakePropertyCamelMethod::propertyNameFromMatches insteadOf WithUpdatable;
+                NamingRule\SnakePropertyCamelMethod {
+                    NamingRule\SnakePropertyCamelMethod::propertyNameFromMatches insteadOf WithUpdatable;
                 }
 
             public function __construct($arg)
@@ -141,8 +141,8 @@ class WithUpdatableTest extends TestCase
             public $snake_case_property;
             
             use WithUpdatable,
-                SnakeCase {
-                    SnakeCase::propertyNameFromMatches insteadOf WithUpdatable;
+                NamingRule\SnakeCase {
+                    NamingRule\SnakeCase::propertyNameFromMatches insteadOf WithUpdatable;
                 }
 
             public function __construct($arg)

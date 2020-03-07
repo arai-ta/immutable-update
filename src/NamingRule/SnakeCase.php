@@ -1,11 +1,11 @@
 <?php
 
-namespace Araitta\ImmutableUpdate;
+namespace Araitta\ImmutableUpdate\NamingRule;
 
-trait CamelCase
+trait SnakeCase
 {
     protected static function propertyNameFromMatches(string $s): string
     {
-        return lcfirst($s);
+        return ltrim($s, '_');
     }
 }
