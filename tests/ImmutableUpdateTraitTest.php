@@ -2,6 +2,7 @@
 
 namespace Araitta\ImmutableUpdate;
 
+use stdClass;
 use PHPUnit\Framework\TestCase;
 
 class TestingClass
@@ -54,6 +55,41 @@ class ImmutableUpdateTraitTest extends TestCase
 
         $obj = new class { use ImmutableUpdateTrait; };
         $obj->withHoge('hoge');
+    }
+
+    public function testVariousTypes()
+    {
+        $obj = new class('str', 123, false, new stdClass) {
+
+            private $string;
+            private $int;
+            private $bool;
+            private $object;
+
+            use ImmutableUpdateTrait;
+
+            public function __construct(string $s, int $i, bool $b, stdClass $o) 
+            {
+                $this->string = $s;
+                $this->int    = $i;
+                $this->bool   = $b;
+                $this->object = $o;
+            }
+
+            public function __get($name)
+            {
+                return $this->{$name};
+            }
+        };
+
+        $new = $obj->withString("tokyo")
+                   ->withBool(true)
+                   ->withObject((object)['var' => 'value']);
+        
+        $this->assertSame("tokyo",  $new->string);
+        $this->assertSame(123,      $new->int);
+        $this->assertSame(true,     $new->bool);
+        $this->assertSame("value",  $new->object->var);
     }
 
 }
