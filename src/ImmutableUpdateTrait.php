@@ -5,6 +5,8 @@ namespace Araitta\ImmutableUpdate;
 trait ImmutableUpdateTrait
 {
 
+    use CamelCase;
+
     public function __call($name, $arguments)
     {
         if (! preg_match('/^with(.*)$/', $name, $matches)) {
@@ -30,10 +32,4 @@ trait ImmutableUpdateTrait
 
         return new static(...$new_arguments);
     }
-
-    protected static function propertyNameFromMatches(string $s): string
-    {
-        return strtolower($s);
-    }
-
 }

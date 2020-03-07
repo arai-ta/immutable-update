@@ -111,8 +111,6 @@ class ImmutableUpdateTraitTest extends TestCase
         $new = $obj->withObject(123.45);
     }
 
-
-
     public function testCaseChange()
     {
         $obj = new class("hoge") {
@@ -133,6 +131,28 @@ class ImmutableUpdateTraitTest extends TestCase
         $new = $obj->withSnakeCaseProperty("fuga");
 
         $this->assertSame("fuga", $new->snake_case_property);
+    }
+
+    public function testSnakeCase()
+    {
+        $obj = new class("hoge") {
+
+            public $snake_case_property;
+            
+            use ImmutableUpdateTrait,
+                SnakeCase {
+                    SnakeCase::propertyNameFromMatches insteadOf ImmutableUpdateTrait;
+                }
+
+            public function __construct($arg)
+            {
+                $this->snake_case_property = $arg;
+            }
+        };
+
+        $new = $obj->with_snake_case_property("piyo");
+
+        $this->assertSame("piyo", $new->snake_case_property);
     }
 
 }
