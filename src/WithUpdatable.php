@@ -2,7 +2,7 @@
 
 namespace Araitta\ImmutableUpdate;
 
-trait ImmutableUpdateTrait
+trait WithUpdatable
 {
 
     use CamelCase;

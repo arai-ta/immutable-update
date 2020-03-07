@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class TestingClass
 {
-    use ImmutableUpdateTrait;
+    use WithUpdatable;
 
     private $foo;
     private $bar;
@@ -27,7 +27,7 @@ class TestingClass
 
 }
 
-class ImmutableUpdateTraitTest extends TestCase
+class WithUpdatableTest extends TestCase
 {
 
     public function test()
@@ -46,7 +46,7 @@ class ImmutableUpdateTraitTest extends TestCase
     {
         $this->expectException(\BadMethodCallException::class);
 
-        $obj = new class { use ImmutableUpdateTrait; };
+        $obj = new class { use WithUpdatable; };
         $obj->noSuchMethod('hoge');
     }
 
@@ -54,7 +54,7 @@ class ImmutableUpdateTraitTest extends TestCase
     {
         $this->expectException(\BadMethodCallException::class);
 
-        $obj = new class { use ImmutableUpdateTrait; };
+        $obj = new class { use WithUpdatable; };
         $obj->withHoge('hoge');
     }
 
@@ -67,7 +67,7 @@ class ImmutableUpdateTraitTest extends TestCase
             private $bool;
             private $object;
 
-            use ImmutableUpdateTrait;
+            use WithUpdatable;
 
             public function __construct(string $s, int $i, bool $b, stdClass $o) 
             {
@@ -99,7 +99,7 @@ class ImmutableUpdateTraitTest extends TestCase
 
             private $object;
 
-            use ImmutableUpdateTrait;
+            use WithUpdatable;
 
             public function __construct(?object $o)
             {
@@ -118,9 +118,9 @@ class ImmutableUpdateTraitTest extends TestCase
 
             public $snake_case_property;
             
-            use ImmutableUpdateTrait,
+            use WithUpdatable,
                 SnakePropertyCamelMethod {
-                    SnakePropertyCamelMethod::propertyNameFromMatches insteadOf ImmutableUpdateTrait;
+                    SnakePropertyCamelMethod::propertyNameFromMatches insteadOf WithUpdatable;
                 }
 
             public function __construct($arg)
@@ -140,9 +140,9 @@ class ImmutableUpdateTraitTest extends TestCase
 
             public $snake_case_property;
             
-            use ImmutableUpdateTrait,
+            use WithUpdatable,
                 SnakeCase {
-                    SnakeCase::propertyNameFromMatches insteadOf ImmutableUpdateTrait;
+                    SnakeCase::propertyNameFromMatches insteadOf WithUpdatable;
                 }
 
             public function __construct($arg)
