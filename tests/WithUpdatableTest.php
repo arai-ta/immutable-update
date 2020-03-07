@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class TestingClass
 {
-    use WithUpdatable;
+    use WithUpdatable, NamingRule\CamelCase;
 
     private $foo;
     private $bar;
@@ -67,7 +67,7 @@ class WithUpdatableTest extends TestCase
             private $bool;
             private $object;
 
-            use WithUpdatable;
+            use WithUpdatable, NamingRule\CamelCase;
 
             public function __construct(string $s, int $i, bool $b, stdClass $o) 
             {
@@ -99,7 +99,7 @@ class WithUpdatableTest extends TestCase
 
             private $object;
 
-            use WithUpdatable;
+            use WithUpdatable, NamingRule\CamelCase;
 
             public function __construct(?object $o)
             {
@@ -119,9 +119,7 @@ class WithUpdatableTest extends TestCase
             public $snake_case_property;
             
             use WithUpdatable,
-                NamingRule\SnakePropertyCamelMethod {
-                    NamingRule\SnakePropertyCamelMethod::propertyNameFromMatches insteadOf WithUpdatable;
-                }
+                NamingRule\SnakePropertyCamelMethod;
 
             public function __construct($arg)
             {
@@ -141,9 +139,7 @@ class WithUpdatableTest extends TestCase
             public $snake_case_property;
             
             use WithUpdatable,
-                NamingRule\SnakeCase {
-                    NamingRule\SnakeCase::propertyNameFromMatches insteadOf WithUpdatable;
-                }
+                NamingRule\SnakeCase;
 
             public function __construct($arg)
             {

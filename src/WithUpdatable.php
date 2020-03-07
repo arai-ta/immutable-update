@@ -5,8 +5,6 @@ namespace Araitta\ImmutableUpdate;
 trait WithUpdatable
 {
 
-    use NamingRule\CamelCase;
-
     public function __call($name, $arguments)
     {
         if (! preg_match('/^with(.*)$/', $name, $matches)) {
