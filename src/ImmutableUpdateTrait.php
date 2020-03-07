@@ -9,24 +9,30 @@ trait ImmutableUpdateTrait
     {
         if (preg_match('/^with(.*)$/', $name, $matches)) {
 
-            $prop_name = $matches[1];
-
-            $prop_name = strtolower($prop_name);
+            $prop_name = static::propertyNameFromMatches($matches[1]);
 
             if (property_exists($this, $prop_name)) {
                 $new_value = $arguments[0];
 
-                $current = get_object_vars($this);
+                 // this feature depends on the order of `get_object_vars` return value
+                 // and constructor arguments order
+                $new_arguments = array_values(
+                    array_merge(
+                        get_object_vars($this),
+                        [$prop_name => $new_value]
+                    )
+                );
 
-                $mixed = array_merge($current, [$prop_name => $new_value]);
-
-                $next = array_values($mixed);
-
-                return new static(...$next);
+                return new static(...$new_arguments);
             }
         }
 
         throw new \BadFunctionCallException('Undefined method call:'.$name);
+    }
+
+    protected static function propertyNameFromMatches(string $matches): string
+    {
+        return strtolower($matches);
     }
 
 }

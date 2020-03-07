@@ -37,9 +37,6 @@ class ImmutableUpdateTraitTest extends TestCase
 
         $this->assertNotSame($obj, $new, '$new is a new instance');
         $this->assertInstanceOf(TestingClass::class, $new);
-
-        $this->assertSame("Ninja", $new->dump()['foo']);
-
         $this->assertSame(['foo' => 'Ninja', 'bar' => "BAR", 'baz' => 'BAZ'], $new->dump());
     }
 
